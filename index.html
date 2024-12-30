@@ -1,0 +1,370 @@
+<html><head><base href="." /><meta charset="UTF-8" /><title>Portafolio Geomático</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #0f0f1a;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+}
+
+.glass {
+    background: rgba(0, 0, 0, 0.001);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+}
+
+.profile-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.header-title {
+    margin-top: 2rem;
+    background: linear-gradient(45deg, #4fd1c5, #9f7aea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards 0.5s;
+}
+
+.header-name {
+    margin: 1.5rem 0;
+    font-size: 1.8rem;
+    color: #e2e8f0;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    padding: 2rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    transform-origin: center;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    padding: 2px;
+    background: linear-gradient(45deg, #4fd1c5, #9f7aea, #fa8072);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px) scale(1.08);
+    box-shadow: 0 10px 30px rgba(159, 122, 234, 0.4);
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+}
+
+.skill-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #4fd1c5, #9f7aea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.1);
+}
+
+.skill-title {
+    color: #fa8072;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-title {
+    transform: scale(1.05);
+}
+
+.skill-description {
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.contact-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: rgba(15, 15, 26, 0.9);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #4fd1c5, #9f7aea);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+    margin: 0.5rem;
+}
+
+.contact-button i {
+    margin-right: 0.5rem;
+}
+
+.contact-button:hover {
+    transform: scale(1.05);
+}
+
+.contact-button.email {
+    background: linear-gradient(45deg, #9f7aea, #fa8072);
+}
+
+.contact-button.whatsapp {
+    background: linear-gradient(45deg, #4fd1c5, #25D366);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@media (max-width: 1024px) {
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="particles-js"></div>
+
+<header>
+    <div class="profile-container glass">
+        <img src="foto.png" alt="Foto de perfil" class="profile-image">
+    </div>
+    <h2 class="header-name">Juan Camilo Navia Castrillón</h2>
+    <h1 class="header-title">Ingeniero Geomático</h1>
+</header>
+
+<div class="skills-container">
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-chart-line skill-icon"></i>
+        <h3 class="skill-title">Análisis de datos</h3>
+        <p class="skill-description">Especializado en el análisis avanzado de datos geoespaciales utilizando Python. Experiencia en procesamiento de grandes volúmenes de datos y análisis multitemporal para aplicaciones geoespaciales.</p>
+    </div>
+
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-image skill-icon"></i>
+        <h3 class="skill-title">Procesamiento de imágenes</h3>
+        <p class="skill-description">Experto en el tratamiento y análisis de imágenes satelitales multiespectrales e hiperespectrales. Dominio de técnicas de clasificación supervisada y no supervisada, correcciones atmosféricas y radiométricas, y análisis de cambios temporales.</p>
+    </div>
+
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-brain skill-icon"></i>
+        <h3 class="skill-title">Redes neuronales</h3>
+        <p class="skill-description">Implementación de modelos de aprendizaje profundo para análisis geoespacial, incluyendo CNN para clasificación de imágenes satelitales, detección de objetos y segmentación semántica. Experiencia con TensorFlow.</p>
+    </div>
+
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-globe skill-icon"></i>
+        <h3 class="skill-title">Procesamiento de información geográfica</h3>
+        <p class="skill-description">Manejo avanzado de Sistemas de Información Geográfica (ArcGIS, QGIS) y bases de datos espaciales (PostGIS). Experiencia en análisis espacial, geoprocesamiento y desarrollo de extensiones personalizadas para SIG.</p>
+    </div>
+
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-cogs skill-icon"></i>
+        <h3 class="skill-title">Automatización de procesos</h3>
+        <p class="skill-description">Desarrollo de scripts y workflows automatizados para procesamiento de datos geoespaciales. Creación de herramientas personalizadas utilizando Python y ModelBuilder para optimizar flujos de trabajo geomáticos.</p>
+    </div>
+
+    <div class="skill-card glass animate-card">
+        <i class="fas fa-map-marked-alt skill-icon"></i>
+        <h3 class="skill-title">Creación de mapas</h3>
+        <p class="skill-description">Diseño y producción de cartografía digital avanzada, visualizaciones interactivas y mapas web utilizando tecnologías como Leaflet. Experiencia en representación de datos y diseño cartográfico.</p>
+    </div>
+</div>
+
+<div class="contact-section">
+    <a href="https://www.linkedin.com/in/tu-perfil" class="contact-button glass">
+        <i class="fab fa-linkedin"></i> Conecta conmigo en LinkedIn
+    </a>
+    <a href="mailto:camilojuan197@gmail.com" class="contact-button email glass">
+        <i class="fas fa-envelope"></i> Envíame un correo
+    </a>
+    <a href="https://wa.me/573213275783" class="contact-button whatsapp glass">
+        <i class="fab fa-whatsapp"></i> Contáctame por WhatsApp
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: ['#4fd1c5', '#9f7aea', '#fa8072']
+            },
+            shape: {
+                type: 'circle'
+            },
+            opacity: {
+                value: 0.5,
+                random: true
+            },
+            size: {
+                value: 3,
+                random: true
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#9f7aea',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 3,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'grab'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 1
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        }
+    });
+
+    function checkScroll() {
+        const cards = document.querySelectorAll('.skill-card');
+        cards.forEach((card, index) => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (cardTop < windowHeight * 0.8) {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                card.style.animationDelay = `${index * 0.1}s`;
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
+});
+</script>
+</body></html>
